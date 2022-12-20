@@ -50,10 +50,32 @@ class Program():
         self.radioWindowThree = QRadioButton('Во двор')
         self.radioWindowFour = QRadioButton('На улицу и во двор')
 
-        self.repairBox =
+        self.repairBox = QGroupBox('Ремонт')
+        self.repairLayout = QVBoxLayout()
+        self.radioRepairNeverMind = QRadioButton('Не важно')
+        self.radioRepairTwo = QRadioButton('Евро ремонт')
+        self.radioRepairThree = QRadioButton('Косметический ремонт')
+        self.radioRepairFour = QRadioButton('Без ремонта')
+
+        self.elevatorBox = QGroupBox('Лифт')
+        self.elevatorLayout = QVBoxLayout()
+        self.radioElevatorNeverMind = QRadioButton('Не важно')
+        self.radioElevatorTwo = QRadioButton('Грузовой')
+        self.radioElevatorThree = QRadioButton('Пассажирский')
+
+        self.washroomBox = QGroupBox('Сан узел')
+        self.washroomLayout = QVBoxLayout()
+        self.radiowashroomNeverMind = QRadioButton('Не важно')
+        self.radiowashroomTwo = QRadioButton('Совмещенный')
+        self.radiowashroomThree = QRadioButton('Раздельный')
+
+        self.resultBox = QGroupBox()
+        self.resultLayout = QVBoxLayout()
+        self.resultLabel = QLabel('')
+        self.resultLb = QLabel('Погрешность +-100К')
 
 
-
+        self.buttonResult = QPushButton('Вычислить')
 
         self.mainLayout = QHBoxLayout()
 
@@ -80,6 +102,30 @@ class Program():
         self.windowLayout.addWidget(self.radioWindowFour)
         self.windowBox.setLayout(self.windowLayout)
 
+        self.repairLayout.addWidget(self.radioRepairNeverMind)
+        self.repairLayout.addWidget(self.radioRepairTwo)
+        self.repairLayout.addWidget(self.radioRepairThree)
+        self.repairLayout.addWidget(self.radioRepairFour)
+        self.repairBox.setLayout(self.repairLayout)
+
+        self.elevatorLayout.addWidget(self.radioElevatorNeverMind)
+        self.elevatorLayout.addWidget(self.radioElevatorTwo)
+        self.elevatorLayout.addWidget(self.radioElevatorThree)
+        self.elevatorBox.setLayout(self.elevatorLayout)
+
+        self.washroomLayout.addWidget(self.radiowashroomNeverMind)
+        self.washroomLayout.addWidget(self.radiowashroomTwo)
+        self.washroomLayout.addWidget(self.radiowashroomThree)
+        self.washroomBox.setLayout(self.washroomLayout)
+
+        self.resultLabel.setAlignment(Qt.AlignCenter)
+        self.resultLb.setAlignment(Qt.AlignCenter)
+        self.resultLayout.addWidget(self.resultLabel)
+        self.resultLayout.addWidget(self.resultLb)
+        self.resultBox.setLayout(self.resultLayout)
+
+
+
         self.oneLayout.addWidget(self.labelRooms)
         self.oneLayout.addWidget(self.rooms)
 
@@ -91,12 +137,18 @@ class Program():
 
         self.twoLayout.addWidget(self.labelFloor)
         self.twoLayout.addWidget(self.floor)
+        self.twoLayout.addWidget(self.washroomBox)
+        self.twoLayout.addWidget(self.resultBox)
+        self.twoLayout.addWidget(self.buttonResult,stretch=1)
 
         self.threeLayout.addWidget(self.labelFloorsHome)
         self.threeLayout.addWidget(self.floorsHome)
 
         self.threeLayout.addWidget(self.labelCeilingHeight)
         self.threeLayout.addWidget(self.ceilingHeight)
+
+        self.threeLayout.addWidget(self.repairBox)
+        self.threeLayout.addWidget(self.elevatorBox)
 
 
 
@@ -110,7 +162,6 @@ class Program():
         self.mainLayout.addLayout(self.oneLayout,stretch=1)
         self.mainLayout.addLayout(self.twoLayout,stretch=1)
         self.mainLayout.addLayout(self.threeLayout,stretch=1)
-
         self.mainWidget.setLayout(self.mainLayout)
 
 
