@@ -10,7 +10,6 @@ import cianParser
 
 
 class Program():
-
     def __init__(self):
         self.app = QApplication([])
         self.mainWidget = QWidget()
@@ -69,6 +68,19 @@ class Program():
         self.radiowashroomTwo = QRadioButton('Совмещенный')
         self.radiowashroomThree = QRadioButton('Раздельный')
 
+        self.typeBox = QGroupBox('Тип')
+        self.typeBoxLayout = QVBoxLayout()
+        self.radioTypeOne = QRadioButton('Новостройка')
+        self.radioTypeTwo = QRadioButton('Старый фонд')
+
+        self.balconyBox = QGroupBox('Балкон')
+        self.balconyLayout = QVBoxLayout()
+        self.radioBalconyOne = QRadioButton('Нет')
+        self.radioBalconyTwo = QRadioButton('Балкон')
+        self.radioBalconyThree = QRadioButton('Лоджия')
+        self.radioBalconyFour = QRadioButton('Балкон, лоджия')
+
+
         self.resultBox = QGroupBox()
         self.resultLayout = QVBoxLayout()
         self.resultLabel = QLabel('')
@@ -76,6 +88,7 @@ class Program():
 
 
         self.buttonResult = QPushButton('Вычислить')
+        self.buttonML = QPushButton('Обучить модель')
 
         self.mainLayout = QHBoxLayout()
 
@@ -85,10 +98,27 @@ class Program():
 
         self.widgets()
 
+    def onClickResult(self):
+        type = 0
+        rooms = 0
+        floor = 0
+        floorsHome = 0
+        square = 0
+        height = 0
+        park = 0
+        window = 0
+        washroom = 0
+        repair = 0
+        elevator = 0
+        balcony = 0
+
+        if self.radioTypeOne:
+            type = 0
+
 
     def widgets(self):
 
-        self.mainWidget.resize(900,600)
+        self.mainWidget.resize(900, 300)
         self.mainWidget.setWindowTitle('Pricer')
 
         self.parkBoxlayout.addWidget(self.radioParkNeverMind)
@@ -118,6 +148,16 @@ class Program():
         self.washroomLayout.addWidget(self.radiowashroomThree)
         self.washroomBox.setLayout(self.washroomLayout)
 
+        self.typeBoxLayout.addWidget(self.radioTypeOne)
+        self.typeBoxLayout.addWidget(self.radioTypeTwo)
+        self.typeBox.setLayout(self.typeBoxLayout)
+
+        self.balconyLayout.addWidget(self.radioBalconyOne)
+        self.balconyLayout.addWidget(self.radioBalconyTwo)
+        self.balconyLayout.addWidget(self.radioBalconyThree)
+        self.balconyLayout.addWidget(self.radioBalconyFour)
+        self.balconyBox.setLayout(self.balconyLayout)
+
         self.resultLabel.setAlignment(Qt.AlignCenter)
         self.resultLb.setAlignment(Qt.AlignCenter)
         self.resultLayout.addWidget(self.resultLabel)
@@ -138,8 +178,11 @@ class Program():
         self.twoLayout.addWidget(self.labelFloor)
         self.twoLayout.addWidget(self.floor)
         self.twoLayout.addWidget(self.washroomBox)
+        self.twoLayout.addWidget(self.typeBox)
+        self.twoLayout.addWidget(self.balconyBox)
         self.twoLayout.addWidget(self.resultBox)
         self.twoLayout.addWidget(self.buttonResult,stretch=1)
+        self.twoLayout.addWidget(self.buttonML,stretch=1)
 
         self.threeLayout.addWidget(self.labelFloorsHome)
         self.threeLayout.addWidget(self.floorsHome)
@@ -149,7 +192,7 @@ class Program():
 
         self.threeLayout.addWidget(self.repairBox)
         self.threeLayout.addWidget(self.elevatorBox)
-
+        self.buttonResult.clicked.connect(self.onClickResult)
 
 
         #

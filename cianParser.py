@@ -14,6 +14,8 @@ from sklearn.metrics import mean_squared_error
 
 from functools import reduce  # Required in Python 3
 import operator
+from joblib import dump,load
+
 
 def prod(iterable):
     return reduce(operator.mul, iterable, 1)
@@ -26,11 +28,13 @@ def test():
     df = df.fillna('0')
     # print(df.values)
     y, x = data_processing(df)
-    x.to_csv('output',index=False)
+    x.to_csv('output.csv',index=False,encoding='utf-8')
+    y.to_csv('model1.csv',index=False)
     # print(y)
-    X_train, X_validation, y_train, y_validation = train_test_split(x, y, test_size=0.1, random_state=21)
+    X_train, X_validation, y_train, y_validation = train_test_split(x, y, test_size=0.1)
     ln = LinearRegression()
     ln.fit(X_train, y_train)
+    dump(ln, 'ln.joblib')
     pred = ln.predict(X_validation)
     pred = pred * 1000000
     y_validation = y_validation * 1000000
@@ -69,6 +73,13 @@ def data_processing(data):
     encoded_series['Колличество комнат'] = rooms
 
     return sale, encoded_series
+
+
+def predML(type, rooms,floor,floorsHome,square,height,park,window,washroom,repair,elevator,balcony):
+    df = pan.DataFrame(data={'Тип':type,'Парковка':park,'Ремонт':repair,'Балкон':balcony,'Окна':window,'Санузел':washroom,'Лифт':elevator,'Этаж':floor,'Этажи':floorsHome,'Высота потолков':height,'Площадь':square,'Колличество комнат':rooms})
+    ln = load('ln.joblib')
+
+
 
 
 
